@@ -1,0 +1,22 @@
+* {
+  margin: 0px;
+  padding: 0px;
+}
+body {
+  font-family: "Montserrat", sans-serif;
+}
+.customMargins {
+  margin: 0 auto;
+
+  max-width: 1128px;
+  align-self: center;
+}
+
+@media (max-width: 1160px) {
+  .customMargins {
+    /* padding: 0 16px; */
+  }
+  .customMargins1 {
+    padding: 0 2px;
+  }
+}
