@@ -654,7 +654,7 @@ const Form1 = ({
                         }}
                       >
                         {Object.values(file).map((file) => (
-                          <div className="text-[16px] py-[8px] px-[12px] font-[500] text-[#000] w-full flex gap-[8px] items-center rounded-[8px] border-solid border-[1px] border-[#CCC]">
+                          <div className="text-[12px] py-[8px] px-[12px] font-[500] text-[#000] w-full flex gap-[8px] items-center rounded-[8px] border-solid border-[1px] border-[#CCC]">
                             {svgSelter(file.type)}
                             {file.name}
                           </div>

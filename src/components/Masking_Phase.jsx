@@ -20,7 +20,7 @@ function Masking_Phase({
   const [numPage, setNumPages] = useState(null);
   const [pageNumber, setPageNumber] = useState(1);
   const [scale, setScale] = useState(0.8);
-  const demo = `<!DOCTYPE html> <html lang="en"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Summary</title> </head> <body> <h1>Summary of Request for Proposals</h1> <h2>I. INSTRUCTIONS</h2> <p>The organization is seeking proposals from qualified consulting firms to assist in specific projects. Interested firms are required to submit proposals in a specified format and address all requirements outlined in the request. Non-responsive proposals will not be considered. The organization reserves the right to accept or reject proposals.</p> <h3>Requests for Information</h3> <p>Questions related to the request should be submitted in writing within a specified deadline.</p> <h2>II. BACKGROUND</h2> <p>This section provides background information about the organization.</p> <h2>III. SCOPE OF WORK</h2> <p>Details about the projects and the type of assistance required from consulting firms are provided in this section.</p> <h2>IV. CONTENTS FOR PROPOSALS</h2> <p>Instructions for preparing proposals, including required sections such as Submittal Letter, Description of Firm, Organizational Structure, References and Description of Experience, Project Overview, Detailed Work Plan, and Cost Proposal.</p> <h2>V. SELECTION CRITERIA</h2> <p>Criteria for evaluating proposals, including demonstrated understanding of the request, experience of the firm, past experience, project understanding and approach, satisfaction of previous clients, oral interview, completeness and quality of the proposal, and cost proposal.</p> <h2>VI. PROCESS FOR SELECTING FIRM</h2> <p>Details about the selection process, including the Selection Advisory Committee, interviews, investigations, notification of firms, and schedule for submission and evaluation process.</p> <h2>VII. AWARD EVALUATION OF BID PROPOSALS</h2> <p>Evaluation criteria for awarding contracts, including solution requirements, maintainability and supportability, acquisition cost, recurring costs, delivery and implementation timeframe, reputation of the vendor, and District experience.</p> <p>The document concludes with information about the award of contracts and the timeline to start work.</p> </body> </html>`;
+  const demo = `Sorry Requested data size is to large`;
   const componentRef = useRef();
   const [loading, setLoading] = useState(false);
   const [selected, setSelectedPage] = useState([]);
@@ -43,13 +43,13 @@ function Masking_Phase({
           index + 1
         }</div><ul className="m-0 flex flex-col gap-1">${Object.keys(item)
           .map((key) => {
-            return `<li className="flex flex-row gap-2 m-0"><span>${key} :</span><span>${[
+            return `<li className="flex flex-row gap-2 m-0"> <span style="width: 130px; overflow-wrap: break-word;">${key} :</span><span style="width: 130px; overflow-wrap: break-word;">${[
               item[key],
             ]}</span></li>`;
           })
           .join()
           .toString()
-          .replaceAll(",", "")}</ul></div></div>`;
+          .replaceAll("</li>,", "</li>")}</ul></div></div>`;
       })
       .join()
       .toString()
@@ -188,8 +188,8 @@ function Masking_Phase({
                                     <ul className="m-0 flex flex-col gap-1">
                                       {Object.keys(item).map((key) => (
                                         <li className="flex flex-row gap-2 m-0">
-                                          <span>{key} :</span>
-                                          <span>{[item[key]]}</span>
+                                                                       <span style={{    overflowWrap: "break-word",width: "130px"}}> {key} :</span>
+                                          <span style={{    overflowWrap: "break-word",width: "250px"}}>{[item[key]]}</span>
                                         </li>
                                       ))}
                                     </ul>
@@ -375,7 +375,11 @@ function Masking_Phase({
                 </button>
                 <button
                   onClick={mergeHandler}
-                  disabled={loading}
+                  disabled={loading|| selected.length==0}
+                  style={{
+                    opacity:loading|| selected.length==0 ? 0.6:1
+                  }}
+
                   class="bg-[#6E14B5] flex flex-col items-center justify-center w-[108px] h-[38px] rounded-[8px] px-[24px] py-[8px] text-[14px] text-white font-semibold items-center gap-[8px] upload-btn-wrapper "
                 >
                   {loading ? (

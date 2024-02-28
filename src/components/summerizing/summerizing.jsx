@@ -202,7 +202,7 @@ const Summerizing = ({ item, demo, setTextFiles, textFiles, files }) => {
         <div ref={componentRef} className="h-full w-full">
           <div
             className="px-[45px]   pt-[10px] relative h-full w-full"
-            style={{ scrollbarWidth: "none" }}
+            style={{ scrollbarWidth: "none" ,overflowWrap: "break-word",}}
           >
             {loading ? (
               <div id="preloader">

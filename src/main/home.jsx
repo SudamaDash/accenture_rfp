@@ -3,6 +3,8 @@ import React, { useEffect, useState } from "react";
 import SubHeader from "../common/SubHeader";
 import Insights from "../components/Insights";
 import MainRfp from "../components/MainRfp";
+import Docxtemplater from "docxtemplater";
+import JSZip from "jszip";
 
 import Progress from "../components/Progress";
 import OriginalRfp from "../components/OriginalRfp";
@@ -13,7 +15,8 @@ import * as XLSX from "xlsx";
 import Header from "../common/header/header";
 import { pdfjs } from "react-pdf";
 import Form1 from "../components/form1";
-import { Document, Page } from "react-pdf";
+import { Document, Paragraph } from 'docx';
+import PizZip from "pizzip";
 pdfjs.GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.js`;
 
 const Home = () => {
@@ -58,7 +61,8 @@ const Home = () => {
           },
         ]);
       });
-    }
+    }  
+    
   };
 
   useEffect(() => {

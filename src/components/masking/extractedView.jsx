@@ -5,6 +5,8 @@ import generatePDF, { ReactToPrint } from "react-to-print";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import { countOccurrences, countWords } from "../../common/util";
+import PizZip from "pizzip";
+import Docxtemplater from "docxtemplater";
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
 const ExtractedView = ({
@@ -48,16 +50,18 @@ const ExtractedView = ({
             const finalData = find.map((data) => {
               const obj = { ...data };
               Object.keys(obj).forEach((key) => {
-                if (item.header == "All") {
-                  
-                  obj[key] = obj[key].replace(item.keyword, item.replacement);
-                } else if (item.header == key) {
-                  obj[key] = obj[key].replace(item.keyword, item.replacement);
+                if(obj[key]!=undefined){
+                  // console.log(obj[key],item.keyword,item.replacement);
+                  if (item.header == "All") {
+                    obj[key] = obj[key]?.toString()?.replace(item.keyword, item.replacement);
+                  } else if (item.header == key) {
+                    obj[key] = obj[key]?.toString()?.replace(item.keyword, item.replacement);
+                  }
                 }
+                
               });
               return obj;
             });
-            console.log( item.index,textFiles)
             setTextFiles(prev=>[
               ...prev.filter((item) => item.index != index),
               {
@@ -152,6 +156,7 @@ const ExtractedView = ({
 
       Promise.all(pdfTextPromises).then((texts) => {
         fullText = texts.join("");
+        
         setPdfText(fullText);
       });
     }
@@ -224,6 +229,50 @@ const ExtractedView = ({
             setLoading(false);
             console.log("error", err);
           });
+      }
+      if (
+        file.type ==
+        "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+      ) {
+        const reader = new FileReader();
+        reader.onload = async (e) => {
+          const content = e.target.result;
+          var doc = new Docxtemplater(new PizZip(content), {delimiters: {start: '12op1j2po1j2poj1po', end: 'op21j4po21jp4oj1op24j'}});
+          var text = doc.getFullText();
+         if(text.length>0){
+          setLoading(true);
+          axios
+            .post("http://localhost:3001/get-html", { text })
+            .then((res) => {
+              const data = res.data.data.choices;
+              setDatFromAi(
+                data[0].message.content
+                  .replace("```", "")
+                  .replace("```html", "").replace("html", "")
+              );
+              
+              setTextFiles(prevCount =>  [
+                ...prevCount.filter(item=>item.index !=index),
+                {
+                  data: data[0].message.content
+                    .replace("```html", "").replace("html", "")
+                    .replace("```", ""),
+                  index,
+                  name: file.name,
+                  pdfText,
+                },
+              ]);
+              setLoading(false);
+            })
+            .catch((err) => {
+              setLoading(false);
+              console.log("error", err);
+            });
+         }
+  
+        };
+        reader.readAsBinaryString(file);
+      
       }
     }
   }, [pdfText]);
@@ -341,8 +390,8 @@ const ExtractedView = ({
                         <ul className="m-0 flex flex-col gap-1">
                           {Object.keys(item).map((key) => (
                             <li className="flex flex-row gap-2 m-0">
-                              <span>{key} :</span>
-                              <span>{[item[key]]}</span>
+                               <span style={{    overflowWrap: "break-word",width: "130px"}}> {key} :</span>
+                                          <span style={{    overflowWrap: "break-word",width: "250px"}}>{[item[key]]}</span>
                             </li>
                           ))}
                         </ul>

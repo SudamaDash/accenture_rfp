@@ -96,8 +96,8 @@ const Pdfview = ({ data, item, textFiles, isExcel }) => {
                       <ul className="m-0 flex flex-col gap-2">
                         {Object.keys(item).map((key) => (
                           <li className="flex flex-row gap-2 m-0">
-                            <span>{key} :</span>
-                            <span>{[item[key]]}</span>
+                                                          <span style={{    overflowWrap: "break-word",width: "130px"}}> {key} :</span>
+                                          <span style={{    overflowWrap: "break-word",width: "250px"}}>{[item[key]]}</span>
                           </li>
                         ))}
                       </ul>
