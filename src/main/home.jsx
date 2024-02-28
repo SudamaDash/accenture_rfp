@@ -48,8 +48,8 @@ const Home = () => {
         };
       });
       promise.then((data) => {
-        setTextFiles([
-          ...textFiles,
+        setTextFiles(prev=>[
+          ...prev,
           {
             index,
             name: file.name,

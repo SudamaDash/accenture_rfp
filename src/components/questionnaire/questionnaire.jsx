@@ -146,7 +146,7 @@ const Questionnaire = ({
                   </div>
                   <div className="flex py-[18px] w-[100%] px-[16px] items-center rounded-[8px] bg-[#fff] border-[1px] border-[#CCC]">
                     <p className="text-[14px] font-[500] leading-[22px]">
-                      {e.answer}
+                      {e.answer?.replaceAll("HTML code","")}
                     </p>
                   </div>
                 </div>

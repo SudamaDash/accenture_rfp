@@ -128,7 +128,7 @@ const Summerizing = ({ item, demo, setTextFiles, textFiles, files }) => {
 
   return (
     <>
-      <div className="  border-[1px] border-solid border-[#DEDEDE] rounded-[12px] bg-[rgb(222 222 222)] overflow-hidden h-[700px] overflow-y-auto ">
+      <div className="  border-[1px] border-solid border-[#DEDEDE] rounded-[12px] bg-[#f9f0ff] overflow-hidden h-[700px] overflow-y-auto ">
         <div
           className="py-[6px] px-[12px] flex  sticky top-0 justify-between "
           style={{
@@ -210,6 +210,7 @@ const Summerizing = ({ item, demo, setTextFiles, textFiles, files }) => {
               </div>
             ) : (
               <div
+              style={{background:'#fff',padding:'8px',borderRadius:'12px'}}
                 dangerouslySetInnerHTML={{
                   __html: dataFromAi,
                 }}

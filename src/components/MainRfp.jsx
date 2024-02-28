@@ -91,7 +91,7 @@ function MainRfp({ setToggle, file, uploadFile, meargedFiles, textFiles }) {
               Main RFP file preview
             </p>
 
-            <div className="bg-[rgb(222 222 222)] flex-col rounded-[12px] w-[100%] border-[1px] border-[#DEDEDE]">
+            <div className="bg-[#f9f0ff] flex-col rounded-[12px] w-[100%] border-[1px] border-[#DEDEDE]">
               <div
                 className="w-[100%] justify-between rounded-t-[12px]  items-center py-[6px] px-[12px]  flex"
                 style={{ background: "rgba(222, 222, 222, 0.60)" }}
@@ -143,12 +143,14 @@ function MainRfp({ setToggle, file, uploadFile, meargedFiles, textFiles }) {
               </div>
               <div className="h-[520px]  overflow-y-auto ">
               {view && (
-                <div ref={componentRef}>
+                <div ref={componentRef} >
                   <div
                     className="px-[45px] h-[520px]  overflow-y-auto pt-[10px]"
                     style={{ scrollbarWidth: "none" }}
+                    
                   >
                     <div
+                    style={{background:'#fff',padding:'8px',borderRadius:'12px'}}
                       dangerouslySetInnerHTML={{
                         __html: meargedFiles,
                       }}

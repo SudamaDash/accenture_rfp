@@ -49,6 +49,7 @@ const ExtractedView = ({
               const obj = { ...data };
               Object.keys(obj).forEach((key) => {
                 if (item.header == "All") {
+                  
                   obj[key] = obj[key].replace(item.keyword, item.replacement);
                 } else if (item.header == key) {
                   obj[key] = obj[key].replace(item.keyword, item.replacement);
@@ -56,8 +57,9 @@ const ExtractedView = ({
               });
               return obj;
             });
-            setTextFiles([
-              ...textFiles.filter((item) => item.index != index),
+            console.log( item.index,textFiles)
+            setTextFiles(prev=>[
+              ...prev.filter((item) => item.index != index),
               {
                 data: finalData,
                 index,
@@ -93,8 +95,8 @@ const ExtractedView = ({
               ]);
             }
 
-            setTextFiles([
-              ...textFiles.filter((item) => item.index != index),
+            setTextFiles(prev=>[
+              ...prev.filter((item) => item.index != index),
               {
                 data: dataFromAi.replace(item.keyword, item.replacement),
                 index,
@@ -170,14 +172,14 @@ const ExtractedView = ({
               setDatFromAi(
                 data[0].message.content
                   .replace("```", "")
-                  .replace("```html", "")
+                  .replace("```html", "").replace("html", "")
               );
               
               setTextFiles(prevCount =>  [
                 ...prevCount.filter(item=>item.index !=index),
                 {
                   data: data[0].message.content
-                    .replace("```html", "")
+                    .replace("```html", "").replace("html", "")
                     .replace("```", ""),
                   index,
                   name: file.name,
@@ -202,13 +204,14 @@ const ExtractedView = ({
             const data = res.data.data.choices;
             const text = res.data.text;
             setDatFromAi(
-              data[0].message.content.replace("```html", "").replace("```", "")
+              data[0].message.content.replace("```html", "").replace("```", "").replace("html", "")
             );
             setTextFiles(prevCount =>  [
               ...prevCount.filter(item=>item.index !=index),
               {
                 data: data[0].message.content
                   .replace("```html", "")
+                  .replace("html", "")
                   .replace("```", ""),
                 index,
                 name: file.name,
@@ -314,7 +317,7 @@ const ExtractedView = ({
           </div>
         </div>
         <div
-          className=" px-[45px] h-[520px] overflow-y-auto  rounded-bl-[8px] rounded-br-[8px] bg-[rgb(222 222 222)] relative  "
+          className=" px-[45px] h-[520px] overflow-y-auto  rounded-bl-[8px] rounded-br-[8px] bg-[#f9f0ff] relative  "
           style={{ scrollbarWidth: "none" }}
         >
           {file.type ==
@@ -356,6 +359,7 @@ const ExtractedView = ({
                   id="pdf-content"
                   style={{
                     padding: "20px",
+                    background:'#fff'
                   }}
                 >
                   <div

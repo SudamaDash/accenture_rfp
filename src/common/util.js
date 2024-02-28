@@ -1,5 +1,6 @@
 export function countWords(str) {
     // Remove leading and trailing whitespaces
+    if(str?.length>0){
     str = str.trim();
     
     // Split the string into an array of words using whitespace as delimiter
@@ -7,6 +8,9 @@ export function countWords(str) {
     
     // Return the length of the array, which represents the number of words
     return words.length;
+}else{
+    return 0;
+}
 }
 
 export function countOccurrences(str, word) {

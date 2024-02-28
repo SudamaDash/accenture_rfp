@@ -97,7 +97,7 @@ function Analyse_Phase({ setToggle, file, textFiles }) {
           >
             {textFiles.map((item) => (
               <div
-                className={`flex flex-col gap-[4px] items-center justify-center w-[170px] h-[216px]  border-solid rounded-[12px] border-[#9747FF] cursor-pointer ${
+                className={`flex flex-col gap-[4px] items-center justify-center w-[170px] h-[216px]  border-solid rounded-[12px] border-[#9747FF] cursor-pointer  ${
                   viewIndex == item.index ? " border-[2px] " : ""
                 } ${viewIndex == item.index ? "bg-[#6E14B526] " : ""} `}
                 onClick={() => {

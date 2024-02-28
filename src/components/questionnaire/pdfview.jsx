@@ -4,9 +4,8 @@ import { countWords } from "../../common/util";
 const Pdfview = ({ data, item, textFiles, isExcel }) => {
   const componentRef = useRef();
   const [view, setView] = useState(false);
-console.log(item)
   return (
-    <div className="bg-[rgb(222 222 222)] flex-col rounded-[12px] w-[100%] border-[1px] border-[#DEDEDE]">
+    <div className="bg-[#f9f0ff] flex-col rounded-[12px] w-[100%] border-[1px] border-[#DEDEDE]">
       <div
         className="w-[100%] justify-between rounded-t-[12px]  items-center py-[6px] px-[12px]  flex"
         style={{ background: "rgba(222, 222, 222, 0.60)" }}
@@ -78,8 +77,8 @@ console.log(item)
       <div className="h-[520px]  overflow-y-auto">
         <div ref={componentRef}>
           <div
-            className="px-[45px]  pt-[10px]"
-            style={{ scrollbarWidth: "none" }}
+            className="px-[45px]  pt-[10px] flex flex-col gap-2"
+            style={{ scrollbarWidth: "none", }}
           >
             {isExcel ? (
               <>
@@ -94,7 +93,7 @@ console.log(item)
                       }}
                     >
                       <div className="text-[14px]">{index + 1}</div>
-                      <ul className="m-0 flex flex-col gap-1">
+                      <ul className="m-0 flex flex-col gap-2">
                         {Object.keys(item).map((key) => (
                           <li className="flex flex-row gap-2 m-0">
                             <span>{key} :</span>
@@ -108,6 +107,7 @@ console.log(item)
               </>
             ) : (
               <div
+              style={{background:'#fff',padding:'8px',borderRadius:'12px'}}
                 dangerouslySetInnerHTML={{
                   __html: item.data,
                 }}
